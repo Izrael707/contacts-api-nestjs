@@ -30,7 +30,7 @@ export class ContactsService {
     return { message: 'Document saved successfully' };
   }
 
-  async deleteContact(id: string | number) {
+  async deleteContact(id: number) {
     await this.ContactsModel.findByIdAndDelete(id);
     return { message: 'Document deleted!' };
   }

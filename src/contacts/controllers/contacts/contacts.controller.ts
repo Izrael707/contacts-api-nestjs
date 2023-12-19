@@ -37,7 +37,7 @@ export class ContactsController {
   }
 
   @Delete('id/:id')
-  deleteContact(@Param('id') id: string | number) {
+  deleteContact(@Param('id', ParseIntPipe) id: number) {
     return this.contactsService.deleteContact(id);
   }
 }
