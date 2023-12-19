@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  ParseIntPipe,
   Post,
   UsePipes,
   ValidationPipe,
@@ -19,18 +20,23 @@ export class ContactsController {
     return this.contactsService.fetchContacts();
   }
 
-  @Get(':id')
-  getOneContact(@Param('id') id: string | number) {
+  @Get('/id/:id')
+  getContactById(@Param('id', ParseIntPipe) id: number) {
     return this.contactsService.fetchContactById(id);
   }
 
-  @UsePipes(ValidationPipe)
+  @Get('/name/:name')
+  getContactByName(@Param('name') name: string){
+    return this.contactsService.fetchContactByName(name)
+  }
+
+  @UsePipes(new ValidationPipe())
   @Post('create')
   createContact(@Body() createContactDto: CreateContactDto) {
     return this.contactsService.createContact(createContactDto);
   }
 
-  @Delete(':id')
+  @Delete('id/:id')
   deleteContact(@Param('id') id: string | number) {
     return this.contactsService.deleteContact(id);
   }
